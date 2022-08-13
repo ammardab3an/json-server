@@ -9,6 +9,8 @@ server.use(middleWares);
 
 server.use((req, res, next) => {
     res.set('Cache-Control', 'public, max-age=315360000');
+    res.removeHeader('Pragma');
+    res.removeHeader('Expires');
     next();
 });
 
