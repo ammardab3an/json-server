@@ -1,17 +1,13 @@
-const groups = [
-    'c_python',
-    'c_excel',
-    'c_web',
-    'c_js',
-    'c_data',
-    'c_aws',
-    'c_draw',
-];
 
-let exp = {};
+const exp = {};
 
-for(const group of groups){
-    exp[group] = require(`./${group}.json`);
-}
+const fs = require('fs');
+const files = fs.readdirSync('./db');
+
+files.forEach(file => {
+    if(file.substr(-5)==='.json'){
+        exp[file.slice(0, -5)] = require('./' + file);
+    }
+})
 
 module.exports = exp;
